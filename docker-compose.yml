@@ -2,7 +2,8 @@ version: "3.8"
 services:
   web:
     #image: anaslinux/flask-app:latest
-    image: nofal-flask-app
+    #image: nofal-flask-app
+    image: alisalahuddin/nofal-flask-app:latest
     ports:
       - "5000:5000"
     environment:
