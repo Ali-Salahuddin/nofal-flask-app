@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage("Code") {
             steps {
-            git url: 'https://github.com/yo-its-anas/flask-app.git', branch: 'main'
+            git url: 'https://github.com/Ali-Salahuddin/nofal-flask-app.git', branch: 'main'
             }
         }
         stage("Build") {
@@ -20,7 +20,7 @@ pipeline {
         stage("Push to Docker Hub") {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId:'dockerhubcreds',
+                    credentialsId:'dockerHubCreds',
                     usernameVariable:'dockerHubUser',
                     passwordVariable:'dockerHubPass')]){
                         sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
