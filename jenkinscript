@@ -1,0 +1,41 @@
+	pipeline{
+    agent any
+    stages{
+        stage("code"){
+            steps{
+                git url:'https://github.com/Ali-Salahuddin/nofal-flask-app.git', branch:'main'
+            }
+        }
+        stage("test"){
+            steps{
+                echo "code test done"
+            }
+        }
+        stage("build"){
+            steps{
+                sh 'docker build --no-cache -t nofal-flask-app .'
+            }
+        }
+        stage("dockerpush"){
+            steps{
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhubcred', 
+                    usernameVariable: 'DOCKER_USER', 
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                    sh 'docker tag nofal-flask-app $DOCKER_USER/nofal-flask-app:${BUILD_NUMBER}'
+                    sh 'docker push $DOCKER_USER/nofal-flask-app:${BUILD_NUMBER}'
+                    sh 'docker tag nofal-flask-app $DOCKER_USER/nofal-flask-app:latest'
+                    sh 'docker push $DOCKER_USER/nofal-flask-app:latest'
+                }
+            }
+        }
+        stage("deployment"){
+            steps{
+                sh 'docker-compose down'
+                sh 'docker-compose up -d'
+            }
+        }
+    }
+}
