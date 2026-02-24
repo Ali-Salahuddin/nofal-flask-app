@@ -24,7 +24,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: anaslinux/flask-app:latest
+          tags: Ali-Salahuddin/nofal-flask-app:latest
 
   deploy:
     needs: build-and-push
@@ -41,12 +41,12 @@ jobs:
             cd /home/ubuntu
 
             if [ ! -d "flask-app" ]; then
-              git clone https://github.com/yo-its-anas/flask-app.git
+              git clone https://github.com/Ali-Salahuddin/nofal-flask-app.git
             fi
 
             cd flask-app
             git pull origin main
 
-            docker pull anaslinux/flask-app:latest
+            docker pull alisalahuddin/nofal-flask-app:latest
             docker-compose down
             docker-compose up -d
