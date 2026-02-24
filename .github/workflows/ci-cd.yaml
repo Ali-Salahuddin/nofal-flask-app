@@ -24,7 +24,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: Ali-Salahuddin/nofal-flask-app:latest
+          tags: alisalahuddin/nofal-flask-app:latest
 
   deploy:
     needs: build-and-push
@@ -48,5 +48,5 @@ jobs:
             git pull origin main
 
             docker pull alisalahuddin/nofal-flask-app:latest
-            docker-compose down
-            docker-compose up -d
+            docker compose down
+            docker compose up -d
