@@ -40,7 +40,7 @@ jobs:
           script: |
             cd /home/ubuntu
 
-            if [ ! -d "flask-app" ]; then
+            if [ ! -d "nofal-flask-app" ]; then
               git clone https://github.com/Ali-Salahuddin/nofal-flask-app.git
             fi
 
