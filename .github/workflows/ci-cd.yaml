@@ -44,7 +44,7 @@ jobs:
               git clone https://github.com/Ali-Salahuddin/nofal-flask-app.git
             fi
 
-            cd flask-app
+            cd nofal-flask-app
             git pull origin main
 
             docker pull alisalahuddin/nofal-flask-app:latest
